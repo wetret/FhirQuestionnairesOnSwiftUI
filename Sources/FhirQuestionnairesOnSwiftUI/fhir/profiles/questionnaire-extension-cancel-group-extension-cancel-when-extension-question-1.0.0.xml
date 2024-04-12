@@ -1,0 +1,35 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when/question"/>
+  <version value="1.0.0"/>
+  <name value="QuestionnaireExtensionCancelGroupExtensionCancelWhenExtensionQuestion"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2024-01-01"/>
+  <fhirVersion value="5.0.0"/>
+  <kind value="complex-type"/>
+  <abstract value="false"/>
+  <context>
+    <type value="element"/>
+    <expression value="Questionnaire.extension.extension"/>
+  </context>
+  <type value="Extension"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="Extension.url">
+      <path value="Extension.url"/>
+      <type>
+        <code value="uri"/>
+      </type>
+      <fixedUri value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when/question"/>
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]"/>
+      <min value="1"/>
+      <max value="1"/>
+      <type>
+        <code value="string"/>
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>

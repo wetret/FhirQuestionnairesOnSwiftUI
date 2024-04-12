@@ -1,0 +1,72 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when"/>
+  <version value="1.0.0"/>
+  <name value="QuestionnaireExtensionCancelGroupExtensionCancelWhen"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2024-01-01"/>
+  <fhirVersion value="5.0.0"/>
+  <kind value="complex-type"/>
+  <abstract value="false"/>
+  <context>
+    <type value="element"/>
+    <expression value="Questionnaire.extension"/>
+  </context>
+  <type value="Extension"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="Extension.extension">
+      <path value="Extension.extension"/>
+      <min value="3"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Extension.extension:question">
+      <path value="Extension.extension"/>
+      <sliceName value="question"/>
+      <min value="1"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when/question|1.0.0"/>
+      </type>
+    </element>
+    <element id="Extension.extension:operator">
+      <path value="Extension.extension"/>
+      <sliceName value="operator"/>
+      <min value="1"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when/operator|1.0.0"/>
+      </type>
+    </element>
+    <element id="Extension.extension:answer">
+      <path value="Extension.extension"/>
+      <sliceName value="answer"/>
+      <min value="1"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when/answer|1.0.0"/>
+      </type>
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url"/>
+      <type>
+        <code value="uri"/>
+      </type>
+      <fixedUri value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when"/>
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]"/>
+      <max value="0"/>
+    </element>
+  </differential>
+</StructureDefinition>

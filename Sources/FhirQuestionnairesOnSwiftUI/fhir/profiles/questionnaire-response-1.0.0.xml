@@ -1,0 +1,20 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://retwet.eu/fhirfhir/StructureDefinition/questionnaire-response"/>
+  <version value="1.0.0"/>
+  <name value="QuestionnaireResponse"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2024-01-01"/>
+  <fhirVersion value="5.0.0"/>
+  <kind value="resource"/>
+  <abstract value="true"/>
+  <type value="QuestionnaireResponse"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="QuestionnaireResponse.questionnaire">
+      <path value="QuestionnaireResponse.questionnaire"/>
+      <min value="1"/>
+    </element>
+  </differential>
+</StructureDefinition>

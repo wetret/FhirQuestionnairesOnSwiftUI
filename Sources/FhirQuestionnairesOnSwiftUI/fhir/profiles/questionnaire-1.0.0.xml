@@ -1,0 +1,610 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://retwet.eu/fhir/StructureDefinition/questionnaire"/>
+  <version value="1.0.0"/>
+  <name value="Questionnaire"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2024-01-01"/>
+  <fhirVersion value="5.0.0"/>
+  <kind value="resource"/>
+  <abstract value="true"/>
+  <type value="Questionnaire"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Questionnaire"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="Questionnaire.extension">
+      <path value="Questionnaire.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.extension:cancel-group">
+      <path value="Questionnaire.extension"/>
+      <sliceName value="cancel-group"/>
+      <min value="0"/>
+      <max value="*"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.url">
+      <path value="Questionnaire.url"/>
+      <min value="1"/>
+    </element>
+    <element id="Questionnaire.version">
+      <path value="Questionnaire.version"/>
+      <min value="1"/>
+    </element>
+    <element id="Questionnaire.date">
+      <path value="Questionnaire.date"/>
+      <min value="1"/>
+    </element>
+    <element id="Questionnaire.item">
+      <path value="Questionnaire.item"/>
+      <min value="1"/>
+      <constraint>
+        <key value="type-code"/>
+        <severity value="error"/>
+        <human value="Constrains available types from ValueSet 'http://hl7.org/fhir/item-type'"/>
+        <expression value=" (type = 'group') or
+                    (type = 'display') or
+                    (type = 'string') or
+                    (type = 'text') or
+                    (type = 'integer') or
+                    (type = 'decimal') or
+                    (type = 'boolean') or
+                    (type = 'date') or
+                    (type = 'time') or
+                    (type = 'dateTime') or
+                    (type = 'coding')"/>
+      </constraint>
+      <constraint>
+        <key value="enably-behavior-count"/>
+        <severity value="error"/>
+        <human value="enableBehavior field can contain extension any-count only if enableBehavior equals 'any'"/>
+        <expression value="enableBehavior.extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count').empty() or enableBehavior = 'any'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-placeholder"/>
+        <severity value="error"/>
+        <human value="Placeholder extensin can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-min"/>
+        <severity value="error"/>
+        <human value="Linelimit min extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-min').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-max"/>
+        <severity value="error"/>
+        <human value="Linelimit max extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-min"/>
+        <severity value="error"/>
+        <human value="Value min extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-max"/>
+        <severity value="error"/>
+        <human value="Value max extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-step-size"/>
+        <severity value="error"/>
+        <human value="Value step-size extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-text"/>
+        <severity value="error"/>
+        <human value="Value text extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="coding-answer-options"/>
+        <severity value="error"/>
+        <human value="Answer options must be set if item.type equals 'coding'"/>
+        <expression value="type = 'coding' implies answerOption.exists()"/>
+      </constraint>
+    </element>
+    <element id="Questionnaire.item.extension">
+      <path value="Questionnaire.item.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.extension:title">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="title"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-title|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:string-text-placeholder">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="string-text-placeholder"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:string-text-linelimit-min">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="string-text-linelimit-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:string-text-linelimit-max">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="string-text-linelimit-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:integer-decimal-value-min">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="integer-decimal-value-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:integer-decimal-value-max">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="integer-decimal-value-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:integer-decimal-value-step-size">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="integer-decimal-value-step-size"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.extension:integer-decimal-value-text">
+      <path value="Questionnaire.item.extension"/>
+      <sliceName value="integer-decimal-value-text"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.enableBehavior.extension">
+      <path value="Questionnaire.item.enableBehavior.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.enableBehavior.extension:count">
+      <path value="Questionnaire.item.enableBehavior.extension"/>
+      <sliceName value="count"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count|1.0.0"/>
+      </type>
+    </element>
+    <!-- Maximal depth of a questionnaire is 3 -->
+    <element id="Questionnaire.item.item.item.item">
+      <path value="Questionnaire.item.item.item.item"/>
+      <max value="0"/>
+    </element>
+
+    <!-- 
+    The FHIR specification says that constraints on recursive elements apply for all elements at all depths: https://www.hl7.org/fhir/profiling.html#recurse.
+    This is not supported by the current version of the validator. Therefore repeating the constraints until depth 3.
+    -->
+    <element id="Questionnaire.item.item">
+      <path value="Questionnaire.item.item"/>
+      <min value="0"/>
+      <constraint>
+        <key value="type-code"/>
+        <severity value="error"/>
+        <human value="Constrains available types from ValueSet 'http://hl7.org/fhir/item-type'"/>
+        <expression value=" (type = 'group') or
+                    (type = 'display') or
+                    (type = 'string') or
+                    (type = 'text') or
+                    (type = 'integer') or
+                    (type = 'decimal') or
+                    (type = 'boolean') or
+                    (type = 'date') or
+                    (type = 'time') or
+                    (type = 'dateTime') or
+                    (type = 'coding')"/>
+      </constraint>
+      <constraint>
+        <key value="enably-behavior-count"/>
+        <severity value="error"/>
+        <human value="enableBehavior field can contain extension any-count only if enableBehavior equals 'any'"/>
+        <expression value="enableBehavior.extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count').empty() or enableBehavior = 'any'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-placeholder"/>
+        <severity value="error"/>
+        <human value="Placeholder extensin can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-min"/>
+        <severity value="error"/>
+        <human value="Linelimit min extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-stirng-text-linelimit-min').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-max"/>
+        <severity value="error"/>
+        <human value="Linelimit max extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-min"/>
+        <severity value="error"/>
+        <human value="Value min extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-max"/>
+        <severity value="error"/>
+        <human value="Value max extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-step-size"/>
+        <severity value="error"/>
+        <human value="Value step-size extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-text"/>
+        <severity value="error"/>
+        <human value="Value text extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="coding-answer-options"/>
+        <severity value="error"/>
+        <human value="Answer options must be set if item.type equals 'coding'"/>
+        <expression value="type = 'coding' implies answerOption.exists()"/>
+      </constraint>
+    </element>
+    <element id="Questionnaire.item.item.extension">
+      <path value="Questionnaire.item.item.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.item.extension:title">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="title"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-title|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:string-text-placeholder">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="string-text-placeholder"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:string-text-linelimit-min">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="string-text-linelimit-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:string-text-linelimit-max">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="string-text-linelimit-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:integer-decimal-value-min">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="integer-decimal-value-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:integer-decimal-value-max">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="integer-decimal-value-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:integer-decimal-value-step-size">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="integer-decimal-value-step-size"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.extension:integer-decimal-value-text">
+      <path value="Questionnaire.item.item.extension"/>
+      <sliceName value="integer-decimal-value-text"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.enableBehavior.extension">
+      <path value="Questionnaire.item.item.enableBehavior.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.item.enableBehavior.extension:count">
+      <path value="Questionnaire.item.item.enableBehavior.extension"/>
+      <sliceName value="count"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item">
+      <path value="Questionnaire.item.item.item"/>
+      <min value="0"/>
+      <constraint>
+        <key value="type-code"/>
+        <severity value="error"/>
+        <human value="Constrains available types from ValueSet 'http://hl7.org/fhir/item-type'"/>
+        <expression value=" (type = 'group') or
+                    (type = 'display') or
+                    (type = 'string') or
+                    (type = 'text') or
+                    (type = 'integer') or
+                    (type = 'decimal') or
+                    (type = 'boolean') or
+                    (type = 'date') or
+                    (type = 'time') or
+                    (type = 'dateTime') or
+                    (type = 'coding')"/>
+      </constraint>
+      <constraint>
+        <key value="enably-behavior-count"/>
+        <severity value="error"/>
+        <human value="enableBehavior field can contain extension any-count only if enableBehavior equals 'any'"/>
+        <expression value="enableBehavior.extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count').empty() or enableBehavior = 'any'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-placeholder"/>
+        <severity value="error"/>
+        <human value="Placeholder extensin can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-min"/>
+        <severity value="error"/>
+        <human value="Linelimit min extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-min').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="string-text-linelimit-max"/>
+        <severity value="error"/>
+        <human value="Linelimit max extension can only be set if item.type equals 'string' or 'text'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max').empty() or type = 'string' or type = 'text'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-min"/>
+        <severity value="error"/>
+        <human value="Value min extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-max"/>
+        <severity value="error"/>
+        <human value="Value max extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-step-size"/>
+        <severity value="error"/>
+        <human value="Value step-size extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="integer-decimal-value-text"/>
+        <severity value="error"/>
+        <human value="Value text extension can only be set if item.type equals 'integer' or 'decimal'"/>
+        <expression value="extension('http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text').empty() or type = 'integer' or type = 'decimal'"/>
+      </constraint>
+      <constraint>
+        <key value="coding-answer-options"/>
+        <severity value="error"/>
+        <human value="Answer options must be set if item.type equals 'coding'"/>
+        <expression value="type = 'coding' implies answerOption.exists()"/>
+      </constraint>
+    </element>
+    <element id="Questionnaire.item.item.item.extension">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:title">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="title"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-title|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:string-text-placeholder">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="string-text-placeholder"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-placeholder|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:string-text-linelimit-min">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="string-text-linelimit-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:string-text-linelimit-max">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="string-text-linelimit-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-string-text-linelimit-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:integer-decimal-value-min">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="integer-decimal-value-min"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-min|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:integer-decimal-value-max">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="integer-decimal-value-max"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-max|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:integer-decimal-value-step-size">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="integer-decimal-value-step-size"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-step-size|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.extension:integer-decimal-value-text">
+      <path value="Questionnaire.item.item.item.extension"/>
+      <sliceName value="integer-decimal-value-text"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/extension-integer-decimal-value-text|1.0.0"/>
+      </type>
+    </element>
+    <element id="Questionnaire.item.item.item.enableBehavior.extension">
+      <path value="Questionnaire.item.item.item.enableBehavior.extension"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Questionnaire.item.item.item.enableBehavior.extension:count">
+      <path value="Questionnaire.item.item.item.enableBehavior.extension"/>
+      <sliceName value="count"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/item/enableBehavior/extension-any-count|1.0.0"/>
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>

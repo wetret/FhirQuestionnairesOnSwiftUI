@@ -1,0 +1,62 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group"/>
+  <version value="1.0.0"/>
+  <name value="QuestionnaireExtensionCancelGroup"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2024-01-01"/>
+  <fhirVersion value="5.0.0"/>
+  <kind value="complex-type"/>
+  <abstract value="false"/>
+  <context>
+    <type value="element"/>
+    <expression value="Questionnaire"/>
+  </context>
+  <type value="Extension"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="Extension.extension">
+      <path value="Extension.extension"/>
+      <min value="1"/>
+      <slicing>
+        <discriminator>
+          <type value="value"/>
+          <path value="url"/>
+        </discriminator>
+        <rules value="open"/>
+      </slicing>
+    </element>
+    <element id="Extension.extension:cancel-when">
+      <path value="Extension.extension"/>
+      <sliceName value="cancel-when"/>
+      <min value="1"/>
+      <max value="*"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-when|1.0.0"/>
+      </type>
+    </element>
+    <element id="Extension.extension:cancel-behavior">
+      <path value="Extension.extension"/>
+      <sliceName value="cancel-behavior"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type>
+        <code value="Extension"/>
+        <profile value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group/cancel-behavior|1.0.0"/>
+      </type>
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url"/>
+      <type>
+        <code value="uri"/>
+      </type>
+      <fixedUri value="http://retwet.eu/fhir/StructureDefinition/questionnaire/extension-cancel-group"/>
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]"/>
+      <max value="0"/>
+    </element>
+  </differential>
+</StructureDefinition>
