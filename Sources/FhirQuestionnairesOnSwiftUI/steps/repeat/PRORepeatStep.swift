@@ -136,6 +136,11 @@ public extension PRORepeatStep
         return PRORepeatStep(id: "repeat.preview-group-input-no-text", title: getTitle(), text: nil, repeatable: PROGroupStep.getPreviewObject3(), enableConditions: [getPreviewObjectEnableOrCondition()])
     }
     
+    static func getPreviewObject5() -> PRORepeatStep
+    {
+        return PRORepeatStep(id: "repeat.preview-group-input-no-text", title: nil, text: nil, repeatable: PROGroupStep.getPreviewObject3(), enableConditions: [getPreviewObjectEnableOrCondition()])
+    }
+    
     static func getPreviewObjectEnableOrCondition() -> PROOrCondition
     {
         return PROOrCondition(getPreviewObjectEnableOr1Condition(), getPreviewObjectEnableOr2Condition())

@@ -99,7 +99,16 @@ public extension PROGroupStep
     
     static func getPreviewObject4() -> PROGroupStep
     {
-        return PROGroupStep(id: "form.preview-with-repeat", title: "Lorem Ipsum Dolor", sections: [
+        return PROGroupStep(id: "form.preview-with-repeat", title: PRODisplayStep.getPreviewObject2().title, sections: [
+            PROTextInputStep.getPreviewObjectWithShortText(),
+            PRODateTimeInputStep.getPreviewObjectWithShortText(),
+            PROSelectionInputStep.getPreviewObjectWithShortText()
+        ])
+    }
+    
+    static func getPreviewObject5() -> PROGroupStep
+    {
+        return PROGroupStep(id: "form.preview-with-repeat", text: PRODisplayStep.getPreviewObject2().text, sections: [
             PROTextInputStep.getPreviewObjectWithShortText(),
             PRODateTimeInputStep.getPreviewObjectWithShortText(),
             PROSelectionInputStep.getPreviewObjectWithShortText()

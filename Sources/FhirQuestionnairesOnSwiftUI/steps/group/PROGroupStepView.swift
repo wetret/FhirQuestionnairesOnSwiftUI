@@ -123,7 +123,6 @@ internal struct PROGroupStepView: View
             }
         }
         .listSectionSpacing(.compact)
-        .padding(.top, getListPadding())
         .padding(.horizontal, -17)
     }
     
@@ -146,19 +145,11 @@ internal struct PROGroupStepView: View
     
     private func getListSectionSpacing() -> CGFloat
     {
-        if let title = step.title
+        if let _ = step.title
         {
             if let _ = step.text
             {
                 return 0
-            }
-            
-            let font = UIFont.boldSystemFont(ofSize: 24)
-            let size = title.widthWithConstrainedHeight(16, font: font) + 10
-            
-            if (size > UIScreen.SCREEN_WIDTH)
-            {
-                return 10
             }
             
             return -5
@@ -167,25 +158,9 @@ internal struct PROGroupStepView: View
         
         return 0
     }
-    
-    private func getListPadding() -> CGFloat
-    {
-        if let title = step.title, step.text == nil
-        {
-            let font = UIFont.boldSystemFont(ofSize: 24)
-            let size = title.widthWithConstrainedHeight(16, font: font) + 10
-            
-            if (size < UIScreen.SCREEN_WIDTH)
-            {
-                return -42
-            }
-        }
-        
-        return -35
-    }
 }
 
 #Preview 
 {
-    PROGroupStepView(step: PROGroupStep.getPreviewObject2())
+    PROGroupStepView(step: PROGroupStep.getPreviewObject5())
 }
