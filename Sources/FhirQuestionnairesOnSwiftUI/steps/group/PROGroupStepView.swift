@@ -123,6 +123,7 @@ internal struct PROGroupStepView: View
             }
         }
         .listSectionSpacing(.compact)
+        .padding(.top, -35)
         .padding(.horizontal, -17)
     }
     
@@ -162,5 +163,5 @@ internal struct PROGroupStepView: View
 
 #Preview 
 {
-    PROGroupStepView(step: PROGroupStep.getPreviewObject5())
+    PROGroupStepView(step: PROGroupStep.getPreviewObject2())
 }

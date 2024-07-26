@@ -77,6 +77,7 @@ internal struct PRORepeatStepView: View
             .onDelete(perform: deleteResult)
         }
         .listSectionSpacing(.compact)
+        .padding(.top, -35)
         .padding(.horizontal, -17)
     }
     
@@ -150,6 +151,7 @@ internal struct PRORepeatStepView: View
                         .listSectionSpacing(getListSectionSpacing())
                     }
                     .listSectionSpacing(.compact)
+                    .padding(.top, -35)
                 }
             }
             label:
@@ -207,5 +209,5 @@ internal struct PRORepeatStepView: View
 
 #Preview 
 {
-    PRORepeatStepView(step: PRORepeatStep.getPreviewObject5())
+    PRORepeatStepView(step: PRORepeatStep.getPreviewObject4())
 }
