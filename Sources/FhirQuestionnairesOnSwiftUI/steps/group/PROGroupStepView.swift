@@ -99,8 +99,8 @@ internal struct PROGroupStepView: View
                         .listRowBackground(Color(.systemGray6))
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing:0))
                 }
-                .listSectionSpacing(getListSectionSpacing())
-                .padding(.bottom, getPadding())
+                .listSectionSpacing(10)
+                .padding(.bottom, 10)
             }
             
             ForEach(0 ..< step.sections.count, id: \.self)
@@ -115,8 +115,7 @@ internal struct PROGroupStepView: View
                             enableStateRecalculation: { recalculateEnableStates() },
                             nextCompleteButtonStateRecalculation: nextCompleteButtonStateRecalculation
                         )
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, -5)
+                        .padding(.vertical, 10)
                     }
                     .labelsHidden()
                 }
@@ -132,32 +131,6 @@ internal struct PROGroupStepView: View
         sectionsEnableState = step.recalculateSectionEnableStates()
         // forces re-evaluation of parent group step enable states
         enableStateRecalculationToggle.toggle()
-    }
-    
-    private func getPadding() -> CGFloat
-    {
-        if let _ = step.text
-        {
-            return 10
-        }
-        
-        return 5
-    }
-    
-    private func getListSectionSpacing() -> CGFloat
-    {
-        if let _ = step.title
-        {
-            if let _ = step.text
-            {
-                return 0
-            }
-            
-            return -5
-            
-        }
-        
-        return 0
     }
 }
 

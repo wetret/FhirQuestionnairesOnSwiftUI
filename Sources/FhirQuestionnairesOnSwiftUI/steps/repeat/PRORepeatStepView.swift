@@ -62,7 +62,7 @@ internal struct PRORepeatStepView: View
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing:0))
                 }
                 .listSectionSpacing(getListSectionSpacing())
-                .padding(.bottom, getPadding())
+                .padding(.bottom, 5)
             }
             
             Section
@@ -178,16 +178,6 @@ internal struct PRORepeatStepView: View
     {
         step.titleFont = PRODisplayStep.DEFAULT_TITLE_FONT
         return step
-    }
-    
-    private func getPadding() -> CGFloat
-    {
-        if let _ = step.text
-        {
-            return 10
-        }
-        
-        return 5
     }
     
     private func getListSectionSpacing() -> CGFloat

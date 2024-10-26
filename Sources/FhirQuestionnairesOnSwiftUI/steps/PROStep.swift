@@ -41,7 +41,8 @@ public extension PROStep
 
 public extension PROStep
 {
-    static var DEFAULT_TITLE_FONT: Font { return .title2 }
+    static var DEFAULT_TITLE_FONT: Font { return .title }
+    static var DEFAULT_SUB_TITLE_FONT: Font { return .title2 }
     static var COMPACT_VIEW_TITLE_FONT: Font { return .headline }
 }
 

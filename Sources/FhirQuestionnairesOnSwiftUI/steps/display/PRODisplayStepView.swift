@@ -18,24 +18,15 @@ internal struct PRODisplayStepView: View
                 Text(title)
                     .font(step.titleFont)
                     .fontWeight(.bold)
-                    .padding(.bottom, getPadding())
+                    .padding(.bottom, 5)
             }
             
             if let text = step.text
             {
                 Text(text)
+                    .padding(.bottom, 5)
             }
         }
-    }
-    
-    private func getPadding() -> CGFloat
-    {
-        if let _ = step.text
-        {
-            return 1
-        }
-        
-        return 0
     }
 }
 
